@@ -14,7 +14,7 @@
         dark
         small
         elevation="0"
-        color="green accent-2"
+        color="primary"
         v-on="on"
         class="my-auto"
       >
