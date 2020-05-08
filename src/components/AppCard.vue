@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .card {
-  max-width: 700px;
+  /* max-width: 800px; */
   padding: 20px;
   margin-bottom: 24px;
   border-radius: 0.375rem;

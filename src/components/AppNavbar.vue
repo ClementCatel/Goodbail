@@ -6,7 +6,8 @@
 
     <v-spacer></v-spacer>
 
-    <v-dialog max-width="500px">
+    <profile-dropdown v-if="user"></profile-dropdown>
+    <v-dialog v-model="dialog" max-width="500px" v-else>
       <template v-slot:activator="{ on }">
         <v-btn
           rounded
@@ -17,13 +18,13 @@
           >Se connecter</v-btn
         >
       </template>
-      <login-form></login-form>
+      <login-form @loggedIn="dialog = false"></login-form>
     </v-dialog>
-    <profile-dropdown></profile-dropdown>
   </v-app-bar>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import ProfileDropdown from "@/components/ProfileDropdown";
 import LoginForm from "@/components/LoginForm";
 
@@ -31,7 +32,15 @@ export default {
   components: {
     ProfileDropdown,
     LoginForm
-  }
+  },
+  data() {
+    return {
+      dialog: false
+    };
+  },
+  computed: mapState({
+    user: state => state.user.user
+  })
 };
 </script>
 

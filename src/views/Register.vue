@@ -14,12 +14,12 @@
       </v-row>
     </v-col>
     <v-col cols="10" md="3" class="mx-auto">
-      <app-card class="text-center py-0" max-width="500px">
+      <app-card class="text-center py-0" max-width="600px">
         <v-card-title class="headline justify-center py-6"
           >Je créer mon compte</v-card-title
         >
 
-        <v-card-text class="px-8 py-8">
+        <v-card-text class="px-4 py-8">
           <v-form>
             <v-text-field
               v-model="form.lastname"
@@ -57,7 +57,13 @@
               rounded
             ></v-text-field>
 
-            <v-btn color="primary darken-2" outlined dark rounded class="my-3"
+            <v-btn
+              color="primary darken-2"
+              outlined
+              dark
+              rounded
+              class="my-3"
+              @click="register"
               >S'inscrire</v-btn
             >
           </v-form>
@@ -89,6 +95,7 @@ export default {
   data() {
     return {
       showPassword: false,
+
       form: {
         firstname: "",
         lastname: "",
@@ -96,6 +103,20 @@ export default {
         password: ""
       }
     };
+  },
+  methods: {
+    register(e) {
+      e.preventDefault();
+
+      this.$store
+        .dispatch("user/register", this.form)
+        .then(() => {
+          this.$router.push("/");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 };
 </script>

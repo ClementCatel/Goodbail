@@ -28,7 +28,9 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" class="py-0">
-              <v-btn color="primary darken-1" rounded>Se connecter</v-btn>
+              <v-btn color="primary darken-1" rounded @click="login">
+                Se connecter
+              </v-btn>
             </v-col>
             <v-col cols="10">
               <router-link to="/register">Mot de passe oublié ?</router-link>
@@ -49,6 +51,31 @@ export default {
         password: ""
       }
     };
+  },
+  methods: {
+    login(e) {
+      e.preventDefault();
+
+      this.$store
+        .dispatch("user/login", {
+          email: this.form.email,
+          password: this.form.password
+        })
+        .then(() => {
+          this.resetForm();
+          this.$router.push("/");
+          this.$emit("loggedIn");
+        })
+        .catch(error => {
+          console.log(error.message);
+        });
+    },
+    resetForm() {
+      this.form = {
+        email: "",
+        password: ""
+      };
+    }
   }
 };
 </script>
