@@ -32,7 +32,4 @@ export default {
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.2),
     0 1px 15px 0 rgba(136, 152, 170, 0.17);
 }
-a {
-  text-decoration: none;
-}
 </style>

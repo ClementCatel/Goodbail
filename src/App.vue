@@ -4,13 +4,13 @@
     <app-navbar></app-navbar>
 
     <v-content class="background">
-      <v-container class="fill-height">
+      <v-container>
         <router-view></router-view>
       </v-container>
     </v-content>
 
     <!-- FOOTER -->
-    <v-footer app class="transparent">
+    <v-footer app absolute class="transparent">
       <v-col class="text-center" cols="12">
         {{ new Date().getFullYear() }} © <strong>Goodbail</strong>
       </v-col>
@@ -33,3 +33,9 @@ export default {
   })
 };
 </script>
+
+<style>
+a {
+  text-decoration: none;
+}
+</style>

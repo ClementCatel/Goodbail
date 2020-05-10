@@ -1,12 +1,24 @@
 <template>
-  <v-app-bar app flat prominent class="white px-md-12 mx-md-12 transparent">
-    <v-toolbar-title class="display-1 font-weight-black my-auto"
-      >Goodbail</v-toolbar-title
-    >
+  <v-app-bar
+    app
+    flat
+    absolute
+    prominent
+    class="white px-md-12 mx-md-12 transparent"
+  >
+    <router-link to="/" class="my-auto">
+      <v-toolbar-title class="display-1 black--text font-weight-black"
+        >Goodbail</v-toolbar-title
+      >
+    </router-link>
 
     <v-spacer></v-spacer>
 
-    <profile-dropdown v-if="user"></profile-dropdown>
+    <profile-dropdown
+      v-if="user && userProfile"
+      :user-profile="userProfile"
+    ></profile-dropdown>
+
     <v-dialog v-model="dialog" max-width="500px" v-else>
       <template v-slot:activator="{ on }">
         <v-btn
@@ -39,7 +51,8 @@ export default {
     };
   },
   computed: mapState({
-    user: state => state.user.user
+    user: state => state.user.user,
+    userProfile: state => state.userProfile.userProfile
   })
 };
 </script>

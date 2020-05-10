@@ -81,6 +81,7 @@
               <v-text-field
                 v-model="form.rent"
                 label="Montant du loyer"
+                type="number"
                 solo
                 rounded
                 required
@@ -91,6 +92,7 @@
               <v-text-field
                 v-model="form.charges"
                 label="Montant des charges"
+                type="number"
                 solo
                 rounded
                 required
@@ -99,7 +101,9 @@
             </v-col>
 
             <v-col cols="12" class="py-0">
-              <v-btn color="primary darken-1" rounded>Enregistrer</v-btn>
+              <v-btn color="primary darken-1" rounded @click="addRental">
+                Enregistrer
+              </v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -117,8 +121,8 @@ export default {
         adress: "",
         postcode: "",
         city: "",
-        rent: 0,
-        charges: 0,
+        rent: null,
+        charges: null,
         tenants: [
           {
             civility: "",
@@ -129,6 +133,10 @@ export default {
     };
   },
   methods: {
+    addRental() {
+      this.$emit("saved", this.form);
+    },
+
     addTenant() {
       this.form.tenants.push({
         civility: "",

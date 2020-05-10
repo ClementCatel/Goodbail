@@ -2,11 +2,7 @@ import { db } from "@/services/firebase";
 import { firestoreAction } from "vuexfire";
 
 const state = () => ({
-  userProfile: {
-    firstname: "",
-    lastname: "",
-    email: ""
-  }
+  userProfile: {}
 });
 
 const mutations = {
@@ -16,9 +12,8 @@ const mutations = {
 };
 
 const actions = {
-  bindUserProfile: firestoreAction(({ bindFirestoreRef, rootState }) => {
-    // return the promise returned by `bindFirestoreRef`
-    return bindFirestoreRef(
+  bindUserProfile: firestoreAction(async ({ bindFirestoreRef, rootState }) => {
+    await bindFirestoreRef(
       "userProfile",
       db.collection("users").doc(rootState.user.user.uid)
     );
@@ -34,7 +29,8 @@ const actions = {
         lastname: payload.lastname ? payload.lastname : user.lastname,
         // eslint-disable-next-line prettier/prettier
         denomination: payload.denomination ? payload.denomination : user.denomination,
-        city: payload.city ? payload.city : user.city
+        city: payload.city ? payload.city : user.city,
+        signature: payload.signature ? payload.signature : user.signature
       });
   })
 };

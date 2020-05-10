@@ -14,8 +14,11 @@ const mutations = {
 const actions = {
   async register({ commit, dispatch }, payload) {
     await auth.createUserWithEmailAndPassword(payload.email, payload.password);
+
     const { email, uid } = auth.currentUser;
     commit("SET_USER", { email, uid });
+
+    const fullname = payload.firstname + " " + payload.lastname;
 
     await db
       .collection("users")
@@ -23,8 +26,9 @@ const actions = {
       .set({
         firstname: payload.firstname,
         lastname: payload.lastname,
-        denomination: payload.firstname + " " + payload.lastname,
+        denomination: fullname,
         city: "",
+        signature: fullname,
         email: payload.email
       });
 

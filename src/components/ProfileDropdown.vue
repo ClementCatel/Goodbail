@@ -1,12 +1,12 @@
 <template>
   <v-menu
     v-model="menu"
-    :close-on-content-click="false"
     :nudge-width="200"
     offset-y
     left
     origin="center center"
     transition="scale-transition"
+    v-if="Object.entries(userProfile).length !== 0"
   >
     <template v-slot:activator="{ on }">
       <v-btn
@@ -62,8 +62,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   data() {
     return {
@@ -84,9 +82,12 @@ export default {
       }
     }
   },
-  computed: mapState({
-    userProfile: state => state.userProfile.userProfile
-  })
+  props: {
+    userProfile: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>
 
