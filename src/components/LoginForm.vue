@@ -8,6 +8,9 @@
         <v-container>
           <v-row justify="center">
             <v-col cols="12" class="py-0">
+              <v-alert v-model="alert" type="error" text dismissible>
+                {{ alertText }}
+              </v-alert>
               <v-text-field
                 v-model="form.email"
                 label="Adresse e-mail"
@@ -46,6 +49,8 @@
 export default {
   data() {
     return {
+      alert: false,
+      alertText: "",
       form: {
         email: "",
         password: ""
@@ -63,11 +68,12 @@ export default {
         })
         .then(() => {
           this.resetForm();
-          this.$router.push("/");
+          this.$router.push("/").catch(() => {});
           this.$emit("loggedIn");
         })
         .catch(error => {
-          console.log(error.message);
+          this.alertText = error.message;
+          this.alert = true;
         });
     },
     resetForm() {

@@ -12,40 +12,88 @@ const mutations = {
 };
 
 const actions = {
-  async register({ commit, dispatch }, payload) {
-    await auth.createUserWithEmailAndPassword(payload.email, payload.password);
+  register({ commit, dispatch }, payload) {
+    commit("SET_LOADING", true, { root: true });
+    return auth
+      .createUserWithEmailAndPassword(payload.email, payload.password)
+      .then(() => {
+        commit("SET_LOADING", false, { root: true });
 
-    const { email, uid } = auth.currentUser;
-    commit("SET_USER", { email, uid });
+        const { email, uid } = auth.currentUser;
+        commit("SET_USER", { email, uid });
 
-    const fullname = payload.firstname + " " + payload.lastname;
+        const fullname = payload.firstname + " " + payload.lastname;
 
-    await db
-      .collection("users")
-      .doc(uid)
-      .set({
-        firstname: payload.firstname,
-        lastname: payload.lastname,
-        denomination: fullname,
-        city: "",
-        signature: fullname,
-        email: payload.email
+        db.collection("users")
+          .doc(uid)
+          .set({
+            firstname: payload.firstname,
+            lastname: payload.lastname,
+            denomination: fullname,
+            city: "",
+            signature: fullname,
+            email: payload.email
+          })
+          .then(() => {
+            dispatch("userProfile/bindUserProfile", null, { root: true });
+          });
+      })
+      .catch(error => {
+        commit("SET_LOADING", false, { root: true });
+        throw error;
       });
-
-    dispatch("userProfile/fetchUserProfile", null, { root: true });
   },
 
-  async login({ commit }, payload) {
-    // Login the user
-    await auth.signInWithEmailAndPassword(payload.email, payload.password);
-    const { email, uid } = auth.currentUser;
-    commit("SET_USER", { email, uid });
+  login({ commit }, payload) {
+    commit("SET_LOADING", true, { root: true });
+    return auth
+      .signInWithEmailAndPassword(payload.email, payload.password)
+      .then(() => {
+        commit("SET_LOADING", false, { root: true });
+        const { email, uid } = auth.currentUser;
+        commit("SET_USER", { email, uid });
+      })
+      .catch(error => {
+        commit("SET_LOADING", false, { root: true });
+        throw error;
+      });
   },
 
   async logout({ commit }) {
     await auth.signOut();
     commit("SET_USER", null);
-    commit("userProfile/SET_USER_PROFILE", null, { root: true });
+    commit("userProfile/SET_USER_PROFILE", {}, { root: true });
+  },
+
+  updateEmail({ commit, rootState }, payload) {
+    commit("SET_LOADING", true, { root: true });
+    return auth.currentUser
+      .updateEmail(payload)
+      .then(() => {
+        db.collection("users")
+          .doc(rootState.userProfile.userProfile.id)
+          .update({
+            email: payload
+          });
+        commit("SET_LOADING", false, { root: true });
+      })
+      .catch(error => {
+        commit("SET_LOADING", false, { root: true });
+        throw error;
+      });
+  },
+
+  updatePassword({ commit }, payload) {
+    commit("SET_LOADING", true, { root: true });
+    return auth.currentUser
+      .updatePassword(payload)
+      .then(() => {
+        commit("SET_LOADING", false, { root: true });
+      })
+      .catch(error => {
+        commit("SET_LOADING", false, { root: true });
+        throw error;
+      });
   }
 };
 

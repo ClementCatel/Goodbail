@@ -124,7 +124,9 @@ export default {
         "center"
       );
 
-      doc.save("quittance.pdf");
+      doc.save(
+        "QUITTANCE " + payload.date2Fr.substring(3).toUpperCase() + ".pdf"
+      );
     }
   },
 

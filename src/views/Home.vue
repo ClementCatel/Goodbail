@@ -75,23 +75,6 @@ export default {
       alertText: "",
 
       dialog: false
-      // items: [
-      //   {
-      //     adress: "4 Allée fosse aux renards",
-      //     postcode: "14123",
-      //     city: "IFS",
-      //     rent: 720,
-      //     charges: 0,
-      //     tenant1: {
-      //       civility: "Mme",
-      //       name: "Brochereux"
-      //     },
-      //     tenant2: {
-      //       civility: "Mr",
-      //       name: "Postil"
-      //     }
-      //   }
-      // ]
     };
   },
   methods: {
@@ -101,7 +84,7 @@ export default {
         await this.$store.dispatch("rentals/addRental", rental);
         this.alertType = "success";
         this.alertText =
-          "dossier enregistré! cliquez dessus pour pouvoir générer une quittance de loyer";
+          "dossier enregistré ! cliquez dessus pour pouvoir générer une quittance de loyer";
         this.alert = true;
       } catch (error) {
         this.alertType = "error";

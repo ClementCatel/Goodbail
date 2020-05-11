@@ -22,12 +22,19 @@ const mutations = {
 };
 
 const actions = {
-  bindRentals: firestoreAction(({ rootState, bindFirestoreRef }) => {
-    // return the promise returned by `bindFirestoreRef`
+  bindRentals: firestoreAction(({ commit, rootState, bindFirestoreRef }) => {
+    commit("SET_LOADING", true, { root: true });
     return bindFirestoreRef(
       "rentals",
       db.collection("rentals").where("userId", "==", rootState.user.user.uid)
-    );
+    )
+      .then(() => {
+        commit("SET_LOADING", false, { root: true });
+      })
+      .catch(error => {
+        commit("SET_LOADING", false, { root: true });
+        console.log(error);
+      });
   }),
 
   getRentalById({ commit }, id) {

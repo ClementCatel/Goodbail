@@ -1,5 +1,11 @@
 <template>
   <v-app>
+    <v-progress-linear
+      indeterminate
+      color="primary darken-1"
+      height="6px"
+      v-if="loading"
+    ></v-progress-linear>
     <!-- NAVBAR -->
     <app-navbar></app-navbar>
 
@@ -20,6 +26,7 @@
 
 <script>
 import AppNavbar from "@/components/AppNavbar";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -28,8 +35,8 @@ export default {
     AppNavbar
   },
 
-  data: () => ({
-    //
+  computed: mapState({
+    loading: state => state.loading
   })
 };
 </script>

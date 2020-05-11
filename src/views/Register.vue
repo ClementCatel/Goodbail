@@ -20,11 +20,15 @@
         >
 
         <v-card-text class="px-4 py-8">
-          <v-form>
+          <v-alert v-model="alert" type="error" text dismissible>
+            {{ alertText }}
+          </v-alert>
+          <v-form v-model="valid">
             <v-text-field
               v-model="form.lastname"
               label="Nom*"
               required
+              :rules="[v => !!v]"
               solo
               rounded
             ></v-text-field>
@@ -33,6 +37,7 @@
               v-model="form.firstname"
               label="Prénom*"
               required
+              :rules="[v => !!v]"
               solo
               rounded
             ></v-text-field>
@@ -42,6 +47,7 @@
               label="Adresse e-mail*"
               type="email"
               required
+              :rules="[v => !!v]"
               solo
               rounded
             ></v-text-field>
@@ -53,6 +59,7 @@
               @click:append="showPassword = !showPassword"
               :type="showPassword ? 'text' : 'password'"
               required
+              :rules="[v => !!v]"
               solo
               rounded
             ></v-text-field>
@@ -60,9 +67,9 @@
             <v-btn
               color="primary darken-2"
               outlined
-              dark
               rounded
               class="my-3"
+              :disabled="!valid"
               @click="register"
               >S'inscrire</v-btn
             >
@@ -92,8 +99,12 @@ export default {
     LoginForm,
     AppCard
   },
+
   data() {
     return {
+      valid: true,
+      alert: false,
+      alertText: "",
       showPassword: false,
 
       form: {
@@ -104,6 +115,7 @@ export default {
       }
     };
   },
+
   methods: {
     register(e) {
       e.preventDefault();
@@ -111,10 +123,11 @@ export default {
       this.$store
         .dispatch("user/register", this.form)
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/").catch(() => {});
         })
         .catch(error => {
-          console.log(error.message);
+          this.alertText = error.message;
+          this.alert = true;
         });
     }
   }

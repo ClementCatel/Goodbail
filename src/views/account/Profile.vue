@@ -8,6 +8,9 @@
         <v-card-text class="pt-0">
           <v-row justify="center">
             <v-col cols="12" class="py-2">
+              <v-alert v-model="alert" :type="alertType" text dismissible>
+                {{ alertText }}
+              </v-alert>
               <v-subheader>Prénom</v-subheader>
               <v-text-field
                 v-model="form.firstname"
@@ -30,7 +33,12 @@
             </v-col>
 
             <v-col cols="12" class="pt-4 pb-2">
-              <v-btn color="primary darken-1" rounded large>
+              <v-btn
+                color="primary darken-1"
+                rounded
+                large
+                @click="updateProfile"
+              >
                 Modifier
               </v-btn>
             </v-col>
@@ -49,22 +57,51 @@ export default {
   components: {
     AppCard
   },
+
   data() {
     return {
+      alert: false,
+      alertType: "success",
+      alertText: "",
       form: {
         firstname: "",
-        lastname: "",
-        signature: ""
+        lastname: ""
       }
     };
   },
+
   computed: mapState({
     userProfile: state => state.userProfile.userProfile
   }),
+
+  methods: {
+    async updateProfile() {
+      if (
+        this.form.firstname != this.userProfile.firstname ||
+        this.form.lastname != this.userProfile.lastname
+      ) {
+        try {
+          await this.$store.dispatch("userProfile/updateUserProfile", {
+            userId: this.userProfile.id,
+            firstname: this.form.firstname,
+            lastname: this.form.lastname
+          });
+          this.alertType = "success";
+          this.alertText = "Votre Profil a bien été modifié";
+        } catch (error) {
+          this.alertType = "error";
+          this.alertText = error.message;
+        }
+        this.alert = true;
+      }
+    }
+  },
+
   created() {
     this.form.firstname = this.userProfile.firstname;
     this.form.lastname = this.userProfile.lastname;
   },
+
   watch: {
     userProfile: function(newValue) {
       this.form.firstname = newValue.firstname;

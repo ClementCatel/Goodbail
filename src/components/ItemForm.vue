@@ -135,17 +135,34 @@ export default {
   methods: {
     addRental() {
       this.$emit("saved", this.form);
+      this.form = {
+        adress: "",
+        postcode: "",
+        city: "",
+        rent: null,
+        charges: null,
+        tenants: [
+          {
+            civility: "",
+            name: ""
+          }
+        ]
+      };
     },
 
     addTenant() {
-      this.form.tenants.push({
-        civility: "",
-        name: ""
-      });
+      if (this.form.tenants.length < 2) {
+        this.form.tenants.push({
+          civility: "",
+          name: ""
+        });
+      }
     },
+
     removeTenant() {
       this.form.tenants.pop();
     },
+
     tenantAction(index) {
       if (index == 0) {
         this.addTenant();
