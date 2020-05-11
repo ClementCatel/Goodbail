@@ -1,11 +1,11 @@
 <template>
-  <v-row align="center" justify="center">
-    <v-col cols="12" md="5" class="px-12">
+  <v-row align="center" justify="center" class="mt-md-12">
+    <v-col cols="12" md="5" class="px-10 px-md-12">
       <h1 class="font-weight-black display-3 mb-12">
-        Vos quittances de loyer en un click.
+        Vos quittances de loyer en un clic.
       </h1>
       <v-row class="justify-center">
-        <v-col cols="10">
+        <v-col cols="12" md="10">
           <v-img
             src="@/assets/svg/undraw_printing_invoices_5r4r.svg"
             class="my-auto"
@@ -13,7 +13,7 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="10" md="3" class="mx-auto">
+    <v-col cols="12" md="3" class="mx-auto">
       <app-card class="text-center py-0" max-width="600px">
         <v-card-title class="headline justify-center py-6"
           >Je créer mon compte</v-card-title
@@ -114,7 +114,7 @@ export default {
           this.$router.push("/");
         })
         .catch(error => {
-          console.log(error);
+          console.log(error.message);
         });
     }
   }

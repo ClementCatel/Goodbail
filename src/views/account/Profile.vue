@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="10" md="8" class="mx-auto">
+    <v-col cols="12" md="8" class="mx-auto">
       <h3 class="display-2 font-weight-bold mb-8 pt-8">
         Modifier Profile
       </h3>

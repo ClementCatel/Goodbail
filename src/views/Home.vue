@@ -9,7 +9,7 @@
           <template v-slot:activator="{ on }">
             <v-btn color="primary darken-1" rounded x-large v-on="on">
               <v-icon left class="px-5">mdi-plus</v-icon>
-              Créer un nouveau dossier
+              nouveau dossier
             </v-btn>
           </template>
           <item-form @saved="addRental"></item-form>

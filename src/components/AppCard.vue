@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ clickable: clickable }" class="card white">
+  <div :class="{ clickable: clickable }" class="card white pa-3 pa-md-5">
     <slot></slot>
   </div>
 </template>
@@ -18,7 +18,6 @@ export default {
 <style scoped>
 .card {
   /* max-width: 800px; */
-  padding: 20px;
   margin-bottom: 24px;
   border-radius: 0.375rem;
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
