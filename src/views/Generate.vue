@@ -116,7 +116,7 @@ export default {
       doc.setFont("helvetica");
       doc.setFontSize(10);
       doc.text(
-        "From goodbail.com",
+        "From good-bail.com",
         105,
         doc.internal.pageSize.height - 10,
         null,
