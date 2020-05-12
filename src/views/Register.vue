@@ -16,7 +16,7 @@
     <v-col cols="12" md="3" class="mx-auto">
       <app-card class="text-center py-0" max-width="600px">
         <v-card-title class="headline justify-center py-6"
-          >Je créer mon compte</v-card-title
+          >Je crée mon compte</v-card-title
         >
 
         <v-card-text class="px-4 py-8">
