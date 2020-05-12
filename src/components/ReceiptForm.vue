@@ -287,16 +287,12 @@ export default {
 
   methods: {
     async updateUserProfile() {
-      try {
-        await this.$store.dispatch("userProfile/updateUserProfile", {
-          userId: this.userProfile.id,
-          denomination: this.form.denomination,
-          city: this.form.city,
-          signature: this.form.signature
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      await this.$store.dispatch("userProfile/updateUserProfile", {
+        userId: this.userProfile.id,
+        denomination: this.form.denomination,
+        city: this.form.city,
+        signature: this.form.signature
+      });
     },
 
     generate() {

@@ -31,9 +31,8 @@ const actions = {
       .then(() => {
         commit("SET_LOADING", false, { root: true });
       })
-      .catch(error => {
+      .catch(() => {
         commit("SET_LOADING", false, { root: true });
-        console.log(error);
       });
   }),
 

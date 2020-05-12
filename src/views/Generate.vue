@@ -134,14 +134,5 @@ export default {
     await store.dispatch("rentals/getRentalById", to.params.id);
     next();
   }
-  // // when route changes and this component is already rendered,
-  // // the logic will be slightly different.
-  // async beforeRouteUpdate (to, from, next) {
-  //   this.post = null
-  //   getPost(to.params.id, (err, post) => {
-  //     this.setData(err, post)
-  //     next()
-  //   })
-  // },
 };
 </script>

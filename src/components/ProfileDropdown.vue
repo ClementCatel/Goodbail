@@ -71,14 +71,7 @@ export default {
   methods: {
     logout() {
       if (confirm("Etes-vous sûr de vouloir vous déconnecter ?")) {
-        this.$store
-          .dispatch("user/logout")
-          .then(() => {
-            // this.$router.push("/register");
-          })
-          .catch(error => {
-            console.log(error.message);
-          });
+        this.$store.dispatch("user/logout");
       }
     }
   },
