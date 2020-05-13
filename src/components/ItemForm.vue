@@ -116,7 +116,7 @@
 export default {
   data() {
     return {
-      civilities: ["Mme", "Mr"],
+      civilities: ["Mme", "M."],
       form: {
         adress: "",
         postcode: "",
