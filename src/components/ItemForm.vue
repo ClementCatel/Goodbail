@@ -1,9 +1,9 @@
 <template>
   <v-card class="text-center">
-    <v-card-title class="justify-center py-6">
-      <span class="headline">Nouveau dossier de location</span>
+    <v-card-title class="justify-center py-6 headline">
+      Nouveau dossier
     </v-card-title>
-    <v-card-text>
+    <v-card-text class="px-1 px-sm-3">
       <v-form>
         <v-container>
           <v-row justify="center">
@@ -38,7 +38,7 @@
 
             <v-col cols="12">
               <v-row v-for="(tenant, index) in form.tenants" :key="index">
-                <v-col cols="3" class="py-0">
+                <v-col cols="12" sm="3" class="py-0">
                   <v-select
                     :items="civilities"
                     v-model="tenant.civility"
@@ -48,7 +48,7 @@
                   ></v-select>
                 </v-col>
 
-                <v-col class="py-0">
+                <v-col cols="auto" class="grow py-0">
                   <v-text-field
                     v-model="tenant.name"
                     label="Nom du locataire"
@@ -77,7 +77,7 @@
               </v-row>
             </v-col>
 
-            <v-col cols="6">
+            <v-col cols="12" md="6">
               <v-text-field
                 v-model="form.rent"
                 label="Montant du loyer"
@@ -88,7 +88,7 @@
                 suffix="€"
               ></v-text-field>
             </v-col>
-            <v-col cols="6">
+            <v-col cols="12" md="6" class="py-0 py-md-3">
               <v-text-field
                 v-model="form.charges"
                 label="Montant des charges"

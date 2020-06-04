@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" md="8" class="mx-auto">
+    <v-col cols="12" md="8" class="mx-auto px-0">
       <h3 class="display-2 font-weight-bold mb-8 pt-8">
         Modifier Adresse Email
       </h3>
@@ -13,7 +13,7 @@
               </v-alert>
               <v-text-field
                 v-model="newEmail"
-                label="Nouvel Adresse Email"
+                label="Nouvelle Adresse Email"
                 solo
                 rounded
                 required
@@ -35,7 +35,7 @@
       </app-card>
     </v-col>
 
-    <v-col cols="12" md="8" class="mx-auto">
+    <v-col cols="12" md="8" class="mx-auto px-0">
       <h3 class="display-2 font-weight-bold mb-8 pt-8">
         Modifier Mot de Passe
       </h3>

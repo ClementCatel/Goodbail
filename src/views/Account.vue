@@ -1,12 +1,12 @@
 <template>
   <v-row justify="center">
-    <v-col cols="10" v-if="userProfile">
+    <v-col cols="10" v-if="userProfile" class="px-0">
       <h3 class="display-1 font-weight-bold">
         {{ userProfile.firstname + " " + userProfile.lastname }}
       </h3>
       <p>{{ userProfile.email }}</p>
     </v-col>
-    <v-col cols="10">
+    <v-col cols="10" class="px-0">
       <v-tabs
         v-model="tab"
         background-color="transparent"

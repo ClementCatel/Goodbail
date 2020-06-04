@@ -1,6 +1,6 @@
 <template>
   <v-row align="center" justify="center" class="mt-md-12">
-    <v-col cols="12" md="5" class="px-10 px-md-12">
+    <v-col cols="12" sm="10" md="8" lg="5" class="px-10 px-md-12">
       <h1 class="font-weight-black display-3 mb-12">
         Vos quittances de loyer en un clic.
       </h1>
@@ -13,8 +13,8 @@
         </v-col>
       </v-row>
     </v-col>
-    <v-col cols="12" md="3" class="mx-auto">
-      <app-card class="text-center py-0" max-width="600px">
+    <v-col cols="12" sm="8" md="5" xl="3" class="mx-auto">
+      <app-card class="text-center py-0 mt-6 mt-lg-0" max-width="600px">
         <v-card-title class="headline justify-center py-6"
           >Je crée mon compte</v-card-title
         >
