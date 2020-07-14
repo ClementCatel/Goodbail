@@ -1,17 +1,9 @@
 <template>
   <v-row align="center" justify="center" class="mt-md-12">
-    <v-col cols="12" sm="10" md="8" lg="5" class="px-10 px-md-12">
-      <h1 class="font-weight-black display-3 mb-12">
+    <v-col cols="12" sm="10" md="8" lg="5" class="px-3 px-md-6">
+      <h1 class="font-weight-black mb-12">
         Vos quittances de loyer en un clic.
       </h1>
-      <v-row class="justify-center">
-        <v-col cols="12" md="10">
-          <v-img
-            src="@/assets/svg/undraw_printing_invoices_5r4r.svg"
-            class="my-auto"
-          ></v-img>
-        </v-col>
-      </v-row>
     </v-col>
     <v-col cols="12" sm="8" md="5" xl="3" class="mx-auto">
       <app-card class="text-center py-0 mt-6 mt-lg-0" max-width="600px">
@@ -65,8 +57,7 @@
             ></v-text-field>
 
             <v-btn
-              color="primary darken-2"
-              outlined
+              color="primary darken-1"
               rounded
               class="my-3"
               :disabled="!valid"
@@ -133,3 +124,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+h1 {
+  font-size: 4rem !important;
+  line-height: 4rem;
+}
+@media screen and (max-width: 1264px) {
+  h1 {
+    text-align: center;
+  }
+}
+</style>
