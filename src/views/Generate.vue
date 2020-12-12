@@ -51,15 +51,17 @@ export default {
         "Je soussigné " +
           payload.denomination +
           " propriétaire du logement désigné ci-dessus, " +
-        "déclare avoir reçu de " + this.tenants() +
-        " la somme de " +
+          "déclare avoir reçu de " +
+          this.tenants() +
+          " la somme de " +
           numberToLetter(
             parseInt(this.rental.rent) + parseInt(this.rental.charges)
           ) +
           " euros " +
-        "au titre du paiement du loyer et des charges pour la période de location " +
-        "du 01 au " + payload.date2Fr + " et lui en donne quittance, sous réserve de tous mes droits.",
-        
+          "au titre du paiement du loyer et des charges pour la période de location " +
+          "du 01 au " +
+          payload.date2Fr +
+          " et lui en donne quittance, sous réserve de tous mes droits."
       ];
     },
 
@@ -107,13 +109,16 @@ export default {
         "center"
       );
       doc.setFontSize(12);
-      doc.text(this.mainParagraph(payload), 20, 80, {maxWidth: 170, align: "justify"});
+      doc.text(this.mainParagraph(payload), 20, 80, {
+        maxWidth: 170,
+        align: "justify"
+      });
       doc.setFontStyle("bold");
-      doc.text('Détail du règlement :', 20, 110)
+      doc.text("Détail du règlement :", 20, 110);
       doc.setFontStyle("normal");
       doc.text(this.summary(payload.date3Fr), 20, 115);
       doc.text("Fait à " + payload.city + " le " + todaysDate, 20, 150);
-      
+
       doc.setFont("new-york");
       doc.setFontSize(48);
       doc.text(payload.signature, 20, 170);

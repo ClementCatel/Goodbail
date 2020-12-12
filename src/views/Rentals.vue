@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height class="py-0 px-md-0">
     <v-row justify="center">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="mt-8">
         <div class="text-center mb-12">
           <v-alert v-model="alert" :type="alertType" text dismissible>
             {{ alertText }}
@@ -36,7 +36,11 @@
                         <v-list-item-title>Modifier</v-list-item-title>
                       </v-list-item>
                     </template>
-                    <item-form v-if="dialogEdit" :editedRental="item" @saved="editRental"></item-form>
+                    <item-form
+                      v-if="dialogEdit"
+                      :editedRental="item"
+                      @saved="editRental"
+                    ></item-form>
                   </v-dialog>
                   <v-list-item @click="deleteRental(item.id)">
                     <v-list-item-title>
@@ -112,8 +116,7 @@ export default {
         this.alert = true;
       } catch (error) {
         this.alertType = "error";
-        this.alertText =
-          "Oops, cette location n'a pas pu être supprimée";
+        this.alertText = "Oops, cette location n'a pas pu être supprimée";
         this.alert = true;
       }
     },

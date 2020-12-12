@@ -4,7 +4,7 @@ import { auth } from "../services/firebase";
 
 import Rentals from "../views/Rentals.vue";
 import Home from "../views/Home.vue";
-import Register from "../views/Register.vue"
+import Register from "../views/Register.vue";
 import Generate from "../views/Generate.vue";
 import Account from "../views/Account.vue";
 import Profile from "../views/account/Profile.vue";
@@ -31,7 +31,7 @@ const routes = [
     component: Register,
     meta: { noAppBar: true }
   },
-  { 
+  {
     path: "/forgot-password",
     name: "forgotPassword",
     component: ForgotPassword,

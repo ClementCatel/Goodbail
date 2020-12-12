@@ -19,7 +19,12 @@
     </v-main>
 
     <!-- FOOTER -->
-    <v-footer app absolute class="transparent" v-if="$route.path != '/register'">
+    <v-footer
+      app
+      absolute
+      class="transparent"
+      v-if="$route.path != '/register'"
+    >
       <v-row justify="center">
         <v-btn
           text
@@ -54,8 +59,8 @@ export default {
   }),
 
   mounted() {
-    if (this.$route.path != '/rentals') {
-      this.$store.commit("SET_LOADING", false)
+    if (this.$route.path != "/rentals") {
+      this.$store.commit("SET_LOADING", false);
     }
   },
 
@@ -69,19 +74,22 @@ export default {
 
   methods: {
     async accept() {
-      this.showUpgradeUI = false
+      this.showUpgradeUI = false;
       await this.$workbox.messageSW({ type: "SKIP_WAITING" });
     }
-  },
+  }
 };
 </script>
 
 <style>
 .v-btn {
-    text-transform: none;
+  text-transform: none;
 }
 .shadow {
   box-shadow: rgb(105 255 213 / 30%) 0px 3px 5px 2px !important;
+}
+.v-subheader {
+  height: 40px !important;
 }
 a {
   text-decoration: none;

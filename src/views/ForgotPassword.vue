@@ -1,16 +1,26 @@
-<template> 
+<template>
 	<v-container fluid fill-height class="py-0 px-md-0">
 		<v-row justify="center">
-			<v-col cols="11" md="5">
+			<v-col cols="12" sm="8" md="5" class="mt-8">
 				<app-card>
-					<v-card-title class="justify-center font-weight-bold">
-						Vous avez oublié votre mot de passe ?
-					</v-card-title>
-					<v-card-text class="text-center">
-						<p class="px-6 pb-6">
-							Vous allez recevoir un email avec un lien valable 24h. Cliquez dessus et choisissez votre nouveau mot de passe !
+          <h1 class="text-h5 text-center py-6 font-weight-bold">
+            Vous avez oublié votre mot de passe ?
+          </h1>
+					<v-card-text class="text-center px-0 px-sm-8">
+						<p class="px-sm-6 pb-6">
+							Vous allez recevoir un e-mail avec un lien valable
+							24h. Cliquez dessus et choisissez votre nouveau mot
+							de passe !
 						</p>
-						<form >
+						<form>
+							<v-alert
+								v-model="alert"
+								:type="alertType"
+								text
+								dismissible
+							>
+								{{ alertText }}
+							</v-alert>
 							<v-text-field
 								v-model="email"
 								label="Adresse e-mail"
@@ -19,8 +29,15 @@
 								rounded
 								required
 							></v-text-field>
-							<v-btn x-large color="primary" rounded min-width="100%" :disabled="!email">
-								Réinitialiser mon mot de passe
+							<v-btn
+								x-large
+								color="primary"
+								rounded
+								min-width="100%"
+								:disabled="!email"
+								@click="sendEmail"
+							>
+								Réinitialiser mot de passe
 							</v-btn>
 						</form>
 					</v-card-text>
@@ -31,38 +48,39 @@
 </template>
 
 <script>
-import AppCard from "@/components/AppCard"
+import AppCard from '@/components/AppCard'
+import { auth } from '@/services/firebase'
+import getFirebaseErrorMessage from '@/plugins/commonUtils'
 
 export default {
 	components: {
-		AppCard
+		AppCard,
 	},
 
 	data() {
 		return {
+			valid: true,
+      alert: false,
+      alertType: "error",
+			alertText: '',
 			email: '',
-			error: null,
-			emailSending: false,
 		}
 	},
 
 	methods: {
 		sendEmail() {
-			if (!this.email) {
-				this.error = 'Veuillez saisir une adresse email valide.'
-				return
-			}
-			this.error = null
-			this.emailSending = true
-			firebase
-				.auth()
-				.sendPasswordResetEmail(this.email)
+      this.$store.commit("SET_LOADING", true);
+			auth.sendPasswordResetEmail(this.email)
 				.then(() => {
-					this.emailSending = false
+          this.$store.commit("SET_LOADING", false)
+          this.alertText = "Un e-mail vous a été envoyé à l'adresse " + this.email + ". Suivez le lien fourni pour réinitialiser votre mot de passe."
+          this.alertType = "success"
+          this.alert = true
 				})
 				.catch((error) => {
-					this.emailSending = false
-					this.error = error.message
+          this.$store.commit("SET_LOADING", false)
+					this.alertText = getFirebaseErrorMessage(error.code)
+					this.alert = true
 				})
 		},
 	},
