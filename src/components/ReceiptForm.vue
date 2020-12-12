@@ -3,11 +3,11 @@
     <v-card-title class="justify-center py-2">
       <span class="title">Quittance de loyer</span>
     </v-card-title>
-    <v-card-text class="py-0">
+    <v-card-text class="py-0 px-2 px-md-4 px-lg-8">
       <v-form v-model="valid">
         <v-row justify="center">
           <v-col cols="12" class="py-2">
-            <v-subheader>Dénomination du propriétaire</v-subheader>
+            <v-subheader class="pl-0">Dénomination du bailleur</v-subheader>
             <v-text-field
               v-model="form.denomination"
               solo
@@ -30,7 +30,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-subheader>Période de location du</v-subheader>
+                <v-subheader class="pl-0">Période de location du</v-subheader>
                 <v-text-field
                   v-model="form.date1Fr"
                   hide-details
@@ -72,7 +72,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-subheader>au</v-subheader>
+                <v-subheader class="pl-0">au</v-subheader>
                 <v-text-field
                   v-model="form.date2Fr"
                   hide-details
@@ -114,7 +114,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-subheader>Date du paiement</v-subheader>
+                <v-subheader class="pl-0">Date du paiement</v-subheader>
                 <v-text-field
                   v-model="form.date3Fr"
                   hide-details
@@ -145,10 +145,10 @@
           </v-col>
 
           <v-col cols="12" class="py-2">
-            <v-subheader>Fait à</v-subheader>
+            <v-subheader class="pl-0">Fait à</v-subheader>
             <v-text-field
               v-model="form.city"
-              placeholder="Ex: Caen"
+              placeholder="Ex: Paris"
               solo
               rounded
               hide-details
@@ -158,7 +158,7 @@
           </v-col>
 
           <v-col cols="12" class="py-2">
-            <v-subheader>Signature (optionnelle)</v-subheader>
+            <v-subheader class="pl-0">Signature</v-subheader>
             <v-text-field
               v-model="form.signature"
               solo
@@ -173,8 +173,11 @@
 
           <v-col cols="12" class="pt-8">
             <v-btn
-              color="primary darken-1"
+              large
+              color="primary shadow"
               rounded
+              class="px-6"
+              active-class="shadow"
               :disabled="!valid"
               @click="generate"
             >

@@ -23,7 +23,7 @@ auth.onAuthStateChanged(async user => {
 
 const store = new Vuex.Store({
   state: {
-    loading: false
+    loading: true
   },
   mutations: {
     ...vuexfireMutations,

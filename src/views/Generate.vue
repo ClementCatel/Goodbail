@@ -1,9 +1,11 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="5" class="mx-auto">
-      <receipt-form @generate="generatePdf"></receipt-form>
-    </v-col>
-  </v-row>
+  <v-container fluid fill-height class="py-0 px-md-0">
+    <v-row>
+      <v-col cols="12" sm="10" md="5" xl="4" class="mx-auto pt-8">
+        <receipt-form @generate="generatePdf"></receipt-form>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -48,22 +50,21 @@ export default {
       return [
         "Je soussigné " +
           payload.denomination +
-          " propriétaire du logement désigné ci-dessus,",
-        "déclare avoir reçu de " + this.tenants(),
-        "la somme de " +
+          " propriétaire du logement désigné ci-dessus, " +
+        "déclare avoir reçu de " + this.tenants() +
+        " la somme de " +
           numberToLetter(
             parseInt(this.rental.rent) + parseInt(this.rental.charges)
           ) +
-          " euros",
-        "au titre du paiement du loyer et des charges pour la période de location",
-        "Du 01 au " + payload.date2Fr,
-        "et lui en donne quittance, sous réserve de tous mes droits."
+          " euros " +
+        "au titre du paiement du loyer et des charges pour la période de location " +
+        "du 01 au " + payload.date2Fr + " et lui en donne quittance, sous réserve de tous mes droits.",
+        
       ];
     },
 
     summary(date) {
       return [
-        "Détail du règlement :",
         "Loyer : " + this.rental.rent + " euros",
         "Provision pour charges : " + this.rental.charges + " euros",
         "Total : " +
@@ -95,7 +96,7 @@ export default {
         "center"
       );
 
-      doc.setFontSize(12);
+      doc.setFontSize(11);
       doc.setFontStyle("normal");
       doc.text(
         "Adresse de la location :  " + this.fullAdress(),
@@ -105,13 +106,17 @@ export default {
         null,
         "center"
       );
-      doc.text(this.mainParagraph(payload), 20, 80);
-      doc.text(this.summary(payload.date3Fr), 20, 120);
-      doc.text("Fait à " + payload.city + " le " + todaysDate, 20, 160);
-
+      doc.setFontSize(12);
+      doc.text(this.mainParagraph(payload), 20, 80, {maxWidth: 170, align: "justify"});
+      doc.setFontStyle("bold");
+      doc.text('Détail du règlement :', 20, 110)
+      doc.setFontStyle("normal");
+      doc.text(this.summary(payload.date3Fr), 20, 115);
+      doc.text("Fait à " + payload.city + " le " + todaysDate, 20, 150);
+      
       doc.setFont("new-york");
       doc.setFontSize(48);
-      doc.text(payload.signature, 20, 180);
+      doc.text(payload.signature, 20, 170);
 
       doc.setFont("helvetica");
       doc.setFontSize(10);

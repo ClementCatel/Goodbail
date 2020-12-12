@@ -58,6 +58,10 @@ const actions = {
     });
   }),
 
+  editRental: firestoreAction(({}, payload) => {
+    return db.collection("rentals").doc(payload.id).set(payload)
+  }),
+
   deleteRental: firestoreAction((context, rentalId) => {
     return db
       .collection("rentals")

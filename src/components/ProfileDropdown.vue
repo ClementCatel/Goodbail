@@ -16,7 +16,7 @@
         elevation="0"
         color="primary"
         v-on="on"
-        class="my-auto"
+        class="my-auto shadow"
       >
         {{ userProfile.firstname.charAt(0) + userProfile.lastname.charAt(0) }}
       </v-btn>
@@ -70,9 +70,7 @@ export default {
   },
   methods: {
     logout() {
-      if (confirm("Etes-vous sûr de vouloir vous déconnecter ?")) {
-        this.$store.dispatch("user/logout");
-      }
+      this.$store.dispatch("user/logout");
     }
   },
   props: {

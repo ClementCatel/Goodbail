@@ -2,26 +2,40 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import { auth } from "../services/firebase";
 
+import Rentals from "../views/Rentals.vue";
 import Home from "../views/Home.vue";
-import Register from "../views/Register.vue";
+import Register from "../views/Register.vue"
 import Generate from "../views/Generate.vue";
 import Account from "../views/Account.vue";
 import Profile from "../views/account/Profile.vue";
 import Settings from "../views/account/Settings.vue";
+import ForgotPassword from "../views/ForgotPassword.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/rentals",
+    name: "Rentals",
+    meta: { requiresAuth: true },
+    component: Rentals
+  },
+  {
     path: "/",
     name: "Home",
-    meta: { requiresAuth: true },
     component: Home
   },
   {
     path: "/register",
-    name: "register",
-    component: Register
+    name: "Register",
+    component: Register,
+    meta: { noAppBar: true }
+  },
+  { 
+    path: "/forgot-password",
+    name: "forgotPassword",
+    component: ForgotPassword,
+    meta: { noAppBar: true }
   },
   {
     path: "/generate/:id",
@@ -61,9 +75,9 @@ router.beforeEach((to, from, next) => {
 
   auth.onAuthStateChanged(function(user) {
     if (requiresAuth && !user) {
-      next("/register");
-    } else if (!requiresAuth && user) {
       next("/");
+    } else if (!requiresAuth && user) {
+      next("/rentals");
     } else {
       next();
     }
