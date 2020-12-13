@@ -3,9 +3,9 @@
 		<v-row justify="center">
 			<v-col cols="12" sm="8" md="5" class="mt-8">
 				<app-card>
-          <h1 class="text-h5 text-center py-6 font-weight-bold">
-            Vous avez oublié votre mot de passe ?
-          </h1>
+					<h1 class="text-h5 text-center py-6 font-weight-bold">
+						Vous avez oublié votre mot de passe ?
+					</h1>
 					<v-card-text class="text-center px-0 px-sm-8">
 						<p class="px-sm-6 pb-6">
 							Vous allez recevoir un e-mail avec un lien valable
@@ -60,8 +60,8 @@ export default {
 	data() {
 		return {
 			valid: true,
-      alert: false,
-      alertType: "error",
+			alert: false,
+			alertType: 'error',
 			alertText: '',
 			email: '',
 		}
@@ -69,16 +69,19 @@ export default {
 
 	methods: {
 		sendEmail() {
-      this.$store.commit("SET_LOADING", true);
+			this.$store.commit('SET_LOADING', true)
 			auth.sendPasswordResetEmail(this.email)
 				.then(() => {
-          this.$store.commit("SET_LOADING", false)
-          this.alertText = "Un e-mail vous a été envoyé à l'adresse " + this.email + ". Suivez le lien fourni pour réinitialiser votre mot de passe."
-          this.alertType = "success"
-          this.alert = true
+					this.$store.commit('SET_LOADING', false)
+					this.alertText =
+						"Un e-mail vous a été envoyé à l'adresse " +
+						this.email +
+						'. Suivez le lien fourni pour réinitialiser votre mot de passe.'
+					this.alertType = 'success'
+					this.alert = true
 				})
 				.catch((error) => {
-          this.$store.commit("SET_LOADING", false)
+					this.$store.commit('SET_LOADING', false)
 					this.alertText = getFirebaseErrorMessage(error.code)
 					this.alert = true
 				})
