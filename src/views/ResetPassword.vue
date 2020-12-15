@@ -82,7 +82,7 @@ export default {
                 auth
                     .confirmPasswordReset(this.code, this.password)
                     .then(() => {
-                        this.$router.push("/register")
+                        this.$router.push("/")
                     })
                     .catch(error => {
                         this.alertType = "error";
