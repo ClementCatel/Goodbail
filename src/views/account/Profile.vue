@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-col cols="12" md="8" class="mx-auto">
       <h3 class="text-h4 font-weight-bold mb-8 pt-8">
-        Modifier Profile
+        Modifier Profil
       </h3>
       <app-card>
         <v-card-text class="pt-0">
