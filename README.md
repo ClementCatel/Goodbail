@@ -1,4 +1,5 @@
-# quittance
+# Goodbail
+Une application web de génération automatique de quittance de loyer en PDF pour bailleur.
 
 ## Project setup
 ```
