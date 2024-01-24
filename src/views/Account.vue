@@ -12,7 +12,7 @@
           color="primary darken-1"
         >
           <v-tab exact to="/account">
-            Profile
+            Profil
           </v-tab>
           <v-tab to="/account/account-settings">
             Paramètres du compte
